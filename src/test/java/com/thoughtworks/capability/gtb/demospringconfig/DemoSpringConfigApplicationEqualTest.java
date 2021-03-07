@@ -8,15 +8,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-@WebMvcTest(properties = "levelNumber = 0",value = LevelController.class)
-class DemoSpringConfigApplicationTests {
-	@Autowired
-	private MockMvc mockMvc;
+@WebMvcTest(properties = "levelNumber = 1",value = LevelController.class)
+public class DemoSpringConfigApplicationEqualTest {
+    @Autowired
+    private MockMvc mockMvc;
 
-	@Test
-	void should_return_basic_when_levelNumber_is_less_than_1() throws Exception {
-		mockMvc.perform(get("/level"))
-				.andExpect(MockMvcResultMatchers.content().string("basic"));
-	}
-
+    @Test
+    void should_return_advanced_when_levelNumber_equals_to_1() throws Exception {
+        mockMvc.perform(get("/level"))
+                .andExpect(MockMvcResultMatchers.content().string("advanced"));
+    }
 }
