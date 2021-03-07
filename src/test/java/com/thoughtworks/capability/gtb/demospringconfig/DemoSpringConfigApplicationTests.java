@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-@SpringBootTest
+@SpringBootTest(properties = {"levelNumber = 0"})
 @AutoConfigureMockMvc
 class DemoSpringConfigApplicationTests {
 
@@ -23,7 +23,7 @@ class DemoSpringConfigApplicationTests {
 	private LevelController levelController;
 
 	@Test
-	void should_return_basic_when_level_is_provided_from_properties_file() throws Exception {
+	void should_return_basic_when_level_is_smaller_than_1() throws Exception {
 		mvc.perform(get("/level"))
 				.andExpect(MockMvcResultMatchers.content().string("basic"));
 	}

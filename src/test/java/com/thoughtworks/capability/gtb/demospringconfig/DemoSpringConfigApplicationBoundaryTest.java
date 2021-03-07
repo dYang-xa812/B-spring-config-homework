@@ -22,7 +22,7 @@ public class DemoSpringConfigApplicationBoundaryTest {
     private LevelController levelController;
 
     @Test
-    void should_return_basic_when_level_equals_to_1() throws Exception {
+    void should_return_advanced_when_level_equals_to_1() throws Exception {
         mvc.perform(get("/level"))
                 .andExpect(MockMvcResultMatchers.content().string("advanced"));
     }
