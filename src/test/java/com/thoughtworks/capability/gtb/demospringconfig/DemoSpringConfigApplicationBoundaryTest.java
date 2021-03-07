@@ -12,20 +12,18 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-@SpringBootTest
 @AutoConfigureMockMvc
-class DemoSpringConfigApplicationTests {
+@SpringBootTest(properties = {"levelNumber = 1"})
+public class DemoSpringConfigApplicationBoundaryTest {
+    @Autowired
+    private MockMvc mvc;
 
-	@Autowired
-	private MockMvc mvc;
+    @Autowired
+    private LevelController levelController;
 
-	@Autowired
-	private LevelController levelController;
-
-	@Test
-	void should_return_basic_when_level_is_provided_from_properties_file() throws Exception {
-		mvc.perform(get("/level"))
-				.andExpect(MockMvcResultMatchers.content().string("basic"));
-	}
-
+    @Test
+    void should_return_basic_when_level_equals_to_1() throws Exception {
+        mvc.perform(get("/level"))
+                .andExpect(MockMvcResultMatchers.content().string("advanced"));
+    }
 }

@@ -1,31 +1,26 @@
 package com.thoughtworks.capability.gtb.demospringconfig;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-@SpringBootTest
 @AutoConfigureMockMvc
-class DemoSpringConfigApplicationTests {
+@SpringBootTest(properties = {"levelNumber = 10"})
+public class DemoSpringConfigApplicationGreaterTest {
+    @Autowired
+    private MockMvc mvc;
 
-	@Autowired
-	private MockMvc mvc;
+    @Autowired
+    private LevelController levelController;
 
-	@Autowired
-	private LevelController levelController;
-
-	@Test
-	void should_return_basic_when_level_is_provided_from_properties_file() throws Exception {
-		mvc.perform(get("/level"))
-				.andExpect(MockMvcResultMatchers.content().string("basic"));
-	}
-
+    @Test
+    void should_return_basic_when_level_is_greater_than_1() throws Exception {
+        mvc.perform(get("/level"))
+                .andExpect(MockMvcResultMatchers.content().string("advanced"));
+    }
 }
